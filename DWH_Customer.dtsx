@@ -1,0 +1,1413 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/20/2023 4:59:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHREE"
+  DTS:CreatorName="SHREE\jhars"
+  DTS:DTSID="{C5A13D99-4724-4083-8D69-8738C80666C1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="8192"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{13764DFC-359A-434A-95BF-EB967C9B4540}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHREE.S23_ODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1D688F96-CB9E-4C1F-845F-0F59A26DCF42}"
+      DTS:ObjectName="SHREE.S23_ODS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=SHREE;Initial Catalog=S23_ODS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{1D688F96-CB9E-4C1F-845F-0F59A26DCF42}SHREE.S23_ODS;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_DIM_Customer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{59A1B805-EBEC-412D-9597-58CEC560BDE5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_DIM_Customer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_DIM_Customer\LKP_AnyChanges"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LKP_AnyChanges"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCustomer]) [refTable]
+where [refTable].[CustomerAccountNumber] = ? and [refTable].[CustomerFirstName] = ? and [refTable].[CustomerLastName] = ? and [refTable].[CustomerAddr] = ? and [refTable].[CustomerCity] = ? and [refTable].[CustomerCountry] = ? and [refTable].[Continent] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerAccountNumber" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerFirstName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerLastName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerAddr" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCity" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCountry" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Continent" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]};#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Connections[OleDbConnection]"
+                  connectionManagerID="{D8259ACD-A41E-41D6-90A0-6FD4B1D3313E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SHREE.S23_DWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerAccountNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAccountNumber"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerAccountNumber</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerFirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerFirstName"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerFirstName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerLastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerLastName"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerLastName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerAddr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAddr"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerAddr</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerCity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCity"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerCity</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[CustomerCountry]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCountry"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerCountry</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input].Columns[Continent]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Continent"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Continent</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LKP_CustomerAccountNumnber"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCustomer]) [refTable]
+where [refTable].[CustomerAccountNumber] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerAccountNumber" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerFirstName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerLastName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerAddr" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCity" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCountry" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Continent" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Connections[OleDbConnection]"
+                  connectionManagerID="{D8259ACD-A41E-41D6-90A0-6FD4B1D3313E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SHREE.S23_DWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input].Columns[CustomerAccountNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAccountNumber"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerAccountNumber</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_DIM_Customer\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_DIM_Customer\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{D8259ACD-A41E-41D6-90A0-6FD4B1D3313E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SHREE.S23_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerAccountNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAccountNumber"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerAccountNumber]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerFirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerFirstName"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerFirstName]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerLastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerLastName"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerLastName]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerAddr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAddr"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerAddr]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerCity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCity"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCity]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerCountry]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCountry"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCountry]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Continent]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Continent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerAccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerAccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerLastName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerAddr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerAddr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerCity" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCountry]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerCountry" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Continent" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_DIM_Customer\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE _UPDATECUSTOMER_CustAccno"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimCustomer]
+   SET 
+      [CustomerFirstName] = ?
+      ,[CustomerLastName] = ?
+      ,[CustomerAddr] = ?
+      ,[CustomerCity] = ?
+      ,[CustomerCountry] = ?
+      ,[Continent] = ?
+ WHERE [CustomerAccountNumber] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Connections[OleDbConnection]"
+                  connectionManagerID="{D8259ACD-A41E-41D6-90A0-6FD4B1D3313E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SHREE.S23_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerFirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerFirstName"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerLastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerLastName"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerAddr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAddr"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerCity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCity"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerCountry]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerCountry"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[Continent]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Continent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]" />
+                    <inputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].Columns[CustomerAccountNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerAccountNumber"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE_SCR_DIM_Customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHREE.S23_ODS]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHREE.S23_ODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerAccountNumber]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAccountNumber]"
+                      name="CustomerAccountNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerFirstName]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerFirstName]"
+                      name="CustomerFirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerLastName]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerLastName]"
+                      name="CustomerLastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerAddr]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerAddr]"
+                      name="CustomerAddr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCity]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCity]"
+                      name="CustomerCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCountry]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[CustomerCountry]"
+                      name="CustomerCountry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].Columns[Continent]"
+                      name="Continent"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerAccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerAccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerLastName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerAddr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerAddr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerCity" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCountry]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CustomerCountry" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Continent" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerAccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerAccountNumber]"
+                      name="CustomerAccountNumber" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerFirstName]"
+                      name="CustomerFirstName" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerLastName]"
+                      name="CustomerLastName" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerAddr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerAddr]"
+                      name="CustomerAddr" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerCity]"
+                      name="CustomerCity" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerCountry]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerCountry]"
+                      name="CustomerCountry" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                      name="Continent" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_DIM_Customer.Paths[Lookup Match Output]"
+              endId="Package\DFT_DIM_Customer\LKP_AnyChanges.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_DIM_Customer.Paths[Lookup Match Output1]"
+              endId="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno.Inputs[OLE DB Command Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT_DIM_Customer\LKP_AnyChanges.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_DIM_Customer.Paths[Lookup No Match Output]"
+              endId="Package\DFT_DIM_Customer\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT_DIM_Customer.Paths[OLE DB Source Output]"
+              endId="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\DFT_DIM_Customer"
+          TopLeft="221.666654555335,251.333331585593" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_DIM_Customer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DFT_DIM_Customer\OLE DB Destination"
+          TopLeft="108.333327414261,240.933331657913" />
+        <NodeLayout
+          Size="265.6,41.6"
+          Id="Package\DFT_DIM_Customer\OLE _UPDATECUSTOMER_CustAccno"
+          TopLeft="435.833309520451,126.533332453436" />
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer"
+          TopLeft="14.9999991804361,6.06666662447982" />
+        <NodeLayout
+          Size="229.6,41.6"
+          Id="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber"
+          TopLeft="9.16666616582209,71.9333328331179" />
+        <NodeLayout
+          Size="163.2,76.8"
+          Id="Package\DFT_DIM_Customer\LKP_AnyChanges"
+          TopLeft="343.333314574428,19.0666665340794" />
+        <EdgeLayout
+          Id="Package\DFT_DIM_Customer.Paths[Lookup No Match Output]"
+          TopLeft="123.966666165822,113.533332833118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.9666612484391,127.399998824795"
+              Start="0,0"
+              End="69.9666612484391,119.899998824795">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.6999994123975" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.6999994123975"
+                    Point2="0,63.6999994123975"
+                    Point3="4,63.6999994123975" />
+                  <mssgle:LineSegment
+                    End="65.9666612484391,63.6999994123975" />
+                  <mssgle:CubicBezierSegment
+                    Point1="65.9666612484391,63.6999994123975"
+                    Point2="69.9666612484391,63.6999994123975"
+                    Point3="69.9666612484391,67.6999994123975" />
+                  <mssgle:LineSegment
+                    End="69.9666612484391,119.899998824795" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-20.8230560945304,68.6999994123975,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_DIM_Customer.Paths[Lookup Match Output1]"
+          TopLeft="424.933314574428,95.8666665340794">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="143.699994946023,30.6666659193569"
+              Start="0,0"
+              End="143.699994946023,23.1666659193569">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.3333329596785" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.3333329596785"
+                    Point2="0,15.3333329596785"
+                    Point3="4,15.3333329596785" />
+                  <mssgle:LineSegment
+                    End="139.699994946023,15.3333329596785" />
+                  <mssgle:CubicBezierSegment
+                    Point1="139.699994946023,15.3333329596785"
+                    Point2="143.699994946023,15.3333329596785"
+                    Point3="143.699994946023,19.3333329596785" />
+                  <mssgle:LineSegment
+                    End="143.699994946023,23.1666659193569" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="23.6586107542615,20.3333329596785,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_DIM_Customer.Paths[Lookup Match Output]"
+          TopLeft="238.766666165822,92.7333328331179">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104.566648408606,-35.2666662990386"
+              Start="0,0"
+              End="97.0666484086057,-35.2666662990386">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="48.2833242043028,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="48.2833242043028,0"
+                    Point2="52.2833242043028,0"
+                    Point3="52.2833242043028,-4" />
+                  <mssgle:LineSegment
+                    End="52.2833242043028,-31.2666662990386" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52.2833242043028,-31.2666662990386"
+                    Point2="52.2833242043028,-35.2666662990386"
+                    Point3="56.2833242043028,-35.2666662990386" />
+                  <mssgle:LineSegment
+                    End="97.0666484086057,-35.2666662990386" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="4.09193748555283,1,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_DIM_Customer.Paths[OLE DB Source Output]"
+          TopLeft="120.083332673129,47.6666666244798">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.2666662086381"
+              Start="0,0"
+              End="0,16.7666662086381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7666662086381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_DIM_Customer\OLE_SCR_DIM_Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_DIM_Customer\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_DIM_Customer\LKP_AnyChanges">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_DIM_Customer\LKP_CustomerAccountNumnber">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
